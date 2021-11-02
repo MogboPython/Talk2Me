@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Chat Page</title>
+    </head>
+    <body>
+        <!--Navigation Bar-->
+        <nav>
+
+        </nav>
+        <div id = "main-section">
+            <!--Riim Selection-->
+            <nav id="sidebar">
+
+            </nav>
+            <!--Message Area-->
+            <div id="rightside-pannel">
+                <!--Display Message-->
+                <div id="dispaly-message-section">
+
+                </div>
+                <!--Input Message-->
+                <div id="input-area">
+                    <input type="text" id="user_message" placeholder="Type Here..." autocomplete="off">
+                    <button type="button" id="send_message">SEND</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!--SocketIO JS-->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+
+        <!--Custom SocketIO JS-->
+        <script src="{{url_for('static', filename = 'scripts/socketio.js')}}"></script>
+    </body>
+</html>
