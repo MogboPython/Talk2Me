@@ -27,7 +27,6 @@ class RegistrationForm(FlaskForm):
 
     confirm_pass = PasswordField('confirm_pass_label', validators=[InputRequired(message = "Confirm Password"), EqualTo('password', message="Passwords must match")])
 
-    submit_button = SubmitField('Create')
 
     def validate_username(self, username):
         user_object = User.query.filter_by(username = username.data).first()
@@ -40,4 +39,3 @@ class LoginForm(FlaskForm):
 
     username = StringField('username_label', validators = [InputRequired(message="Username Required")])
     password = PasswordField('password_label', validators=[InputRequired(message="Password Required"), invalid_credentials])
-    submit_button = SubmitField('Login')
