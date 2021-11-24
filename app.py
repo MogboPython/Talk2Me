@@ -1,3 +1,4 @@
+import os
 from logging import debug
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_wtf import form
@@ -10,10 +11,10 @@ from flask_socketio import SocketIO, rooms, send, emit, join_room, leave_room
 
 #Configure App
 app = Flask(__name__)
-app.secret_key = 'password'
+app.secret_key = os.environ.get('SECRET')
 
 #Configure database
-app.config['SQLALCHEMY_DATABASE_URI']='postgresql://gaqsswswfjeipz:a2eefd3c917fb89e84fadccc358cd77f8ad859c06a2465e16652ca15c746150c@ec2-3-218-47-9.compute-1.amazonaws.com:5432/dcv7dg2kkk2kgp'
+app.config['SQLALCHEMY_DATABASE_URI']= os.environ.get('DATABASE_URL')
 db = SQLAlchemy(app)
 
 #Initialise Flask-SocketIO
@@ -78,23 +79,27 @@ def logout():
     flash('You have logged out successfully', 'success')
     return redirect(url_for('login'))
 
-@socketio.on('message')
-def message(data):
+@app.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return render_template('404.html'), 404
 
-    print(f"\n\n{data}\n\n")
+
+@socketio.on('message')
+def on_message(data):
     send({'msg': data['msg'], 'username': data['username'], 'time_stamp': strftime('%b-%d %I:%M%p', localtime())}, room = data['room'])
     
 @socketio.on('join')
-def join(data):
+def on_join(data):
 
     join_room(data['room'])
     send({'msg': data['username'] + " has joined the " + data['room'] + "room"}, room = data['room'])
 
 @socketio.on('leave')
-def leave(data):
+def on_leave(data):
 
     leave_room(data['room'])
     send({'msg': data['username'] + " has left the " + data['room'] + "room"}, room = data['room'])
 
 if __name__ == "__main__":
-    socketio.run(app, debug = True)
+    app.run()
