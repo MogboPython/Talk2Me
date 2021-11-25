@@ -15,7 +15,7 @@ app.secret_key = os.environ.get('SECRET')
 app.config['WTF_CSRF_SECRET_KEY'] = b'J/gz\xbf=\x92\xba"\xc2\xe3\xb5\x82\xba\x82\x03'
 
 #Configure database
-app.config['SQLALCHEMY_DATABASE_URI']= os.environ.get('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI']= 'postgresql://gaqsswswfjeipz:a2eefd3c917fb89e84fadccc358cd77f8ad859c06a2465e16652ca15c746150c@ec2-3-218-47-9.compute-1.amazonaws.com:5432/dcv7dg2kkk2kgp'#os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
