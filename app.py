@@ -12,13 +12,15 @@ from flask_socketio import SocketIO, rooms, send, emit, join_room, leave_room
 #Configure App
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET')
+app.config['WTF_CSRF_SECRET_KEY'] = b'J/gz\xbf=\x92\xba"\xc2\xe3\xb5\x82\xba\x82\x03'
 
 #Configure database
 app.config['SQLALCHEMY_DATABASE_URI']= os.environ.get('DATABASE_URL')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 #Initialise Flask-SocketIO
-socketio = SocketIO(app)
+socketio = SocketIO(app, manage_session=False)
 ROOMS = ["lounge", "news", "games", "coding"]
 
 
