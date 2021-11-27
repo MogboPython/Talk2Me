@@ -2,9 +2,8 @@
 
 ## Introduction
 This is a chat application, implemented using Flask-SocketIO with both the database (PostgreSQL) and the app deployed in Heroku. It also has user registration and authentication functionalities.
-I followed 
+I followed this 13-part video series by Sandeep Sudhakaran where he built this app from scratch.
 <a href="https://www.youtube.com/playlist?list=PLlLKnYbrXi_rFrzsPa0NxZayHrT52a777"><img src="https://github.com/sandeepsudhakaran/rchat-app/blob/master/static/images/rchat-playlist.png" alt="Watch Code Along Series"></a>
-A 13-part video series where he built this app from scratch.
 
 
 ## Files in the program
